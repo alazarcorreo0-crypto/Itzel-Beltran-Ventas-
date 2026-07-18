@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas Itzel Beltrán - App Profesional</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --primary: #ec4899;
+            --primary-hover: #db2777;
+            --secondary: #6366f1;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 100px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            color: white;
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 1rem;
+            color: var(--text-main);
+            background-color: #f8fafc;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            background-color: #fff;
+        }
+
+        .row {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 8px 0;
+            margin-left: -8px;
+            margin-right: -8px;
+        }
+
+        .col {
+            display: table-cell;
+        }
+
+        .photo-container {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            position: relative;
+            background-color: #f8fafc;
+            overflow: hidden;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .photo-container:hover {
+            border-color: var(--primary);
+            background-color: #fdf2f8;
+        }
+
+        .photo-container img {
+            max-width: 100%;
+            max-height: 140px;
+            border-radius: 6px;
+            margin-top: 4px;
+            object-fit: contain;
+        }
+
+        .result-box {
+            background-color: #fdf2f8;
+            border: 1px solid #fbcfe8;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 8px;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        .result-row.total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            border-top: 1px dashed #fbcfe8;
+            padding-top: 6px;
+            margin-bottom: 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(236, 72, 153, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--text-main);
+            margin-top: 8px;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 4px 0;
+            position: relative;
+        }
+
+        .tab-item.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .tab-icon {
+            font-size: 1.3rem;
+            margin-bottom: 2px;
+        }
+
+        .badge-count {
+            background-color: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            border-radius: 10px;
+            padding: 1px 6px;
+            position: absolute;
+            top: 0;
+            right: 8px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Order Cards */
+        .order-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .order-client {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .order-status {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .status-pendiente {
+            background-color: #fef3c7;
+            color: #d97706;
+        }
+
+        .status-entregado {
+            background-color: #d1fae5;
+            color: #059669;
+        }
+
+        .order-body {
+            display: flex;
+            gap: 12px;
+        }
+
+        .order-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            object-fit: cover;
+            background-color: #f1f5f9;
+            cursor: pointer;
+        }
+
+        .order-info {
+            flex: 1;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .order-price {
+            font-weight: 700;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            margin-top: 2px;
+        }
+
+        .order-actions {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-small {
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            width: auto;
+        }
+
+        /* Alerts & Toasts */
+        .alert-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            max-width: 90%;
+        }
+
+        .toast-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .toast-error {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .toast-info {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 0;
+            width: auto;
+        }
+
+        /* PIN Modal */
+        .pin-input-group {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .pin-input {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            text-align: center;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* Stats Card */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Configuration Panel */
+        .config-section {
+            background: #f1f5f9;
+            border-left: 4px solid var(--primary);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .config-title {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .config-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Filters */
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: white;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="alert-toast"></div>
+
+    <!-- Modal de Imagen -->
+    <div id="imageModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 95%; padding: 0;">
+            <div style="position: relative;">
+                <img id="modalImage" src="" style="width: 100%; border-radius: 16px 16px 0 0;">
+                <button class="modal-close" onclick="closeImageModal()" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px;">✕</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal PIN de Seguridad -->
+    <div id="pinModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔐 PIN de Seguridad</h2>
+                <button class="modal-close" onclick="closePinModal()">✕</button>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 20px;">Ingresa tu PIN de 4 dígitos para acceder a Ajustes</p>
+            <div class="pin-input-group" id="pinInputGroup"></div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn-secondary" onclick="closePinModal()" style="width: auto; padding: 8px 16px;">Cancelar</button>
+            </div>
+            <p style="text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 16px;">PIN por defecto: 0000</p>
+        </div>
+    </div>
+
+    <!-- PÁGINA 1: CAPTURA Y CÁLCULO -->
+    <div id="page-calc" class="page active">
+        <header>
+            <h1>Ventas Itzel Beltrán</h1>
+            <p>Calculadora Inteligente & Gestión de Entregas</p>
+        </header>
+
+        <div class="container">
+            <div class="card" style="background-color: #f1f5f9; border-color: #cbd5e1; padding: 10px 14px;">
+                <div class="card-title" style="margin-bottom: 4px; font-size: 0.85rem; color: var(--text-muted);">
+                    ⚙️ Configuración Activa
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; font-size: 0.8rem; color: #475569;">
+                    <div>💵 TC:<br><b id="lbl-tc">$18.50</b></div>
+                    <div>📈 Tax:<br><b id="lbl-tax">9%</b></div>
+                    <div>🧳 Maleta:<br><b id="lbl-maleta">$38</b></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🛍️ Captura de Prenda</div>
+                
+                <div class="form-group">
+                    <label for="usd-price">Precio en Tienda (USD etiqueta)</label>
+                    <input type="number" id="usd-price" step="0.01" placeholder="Ej. 14.99" oninput="calculatePrice()">
+                </div>
+
+                <div class="row">
+                    <div class="col" style="width: 50%;">
+                        <div class="form-group">
+                            <label for="item-size">Talla</label>
+                            <select id="item-size">
+                                <option value="N/A">Seleccionar</option>
+                                <option value="0-3M">0-3 M</option>
+                                <option value="3-6M">3-6 M</option>
+                                <option value="6-12M">6-12 M</option>
+                                <option value="12-18M">12-18 M</option>
+                                <option value="2T">2T</option>
+                                <option value="3T">3T</option>
+                                <option value="4T">4T</option>
+                                <option value="5">5</option>
+                                <option value="S">S (Chica)</option>
+                                <option value="M">M (Mediana)</option>
+                                <option value="L">L (Grande)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col" style="width: 50%;">
+                        <div class="form-group">
+                            <label for="item-desc">Detalle/Color</label>
+                            <input type="text" id="item-desc" placeholder="Ej. Vestido Rosa">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 4px; margin-bottom: 14px;">
+                    <div class="col" style="width: 50%;">
+                        <label>Foto Prenda</label>
+                        <div class="photo-container" onclick="document.getElementById('file-prenda').click()">
+                            <span id="label-prenda">📸 Tomar Foto</span>
+                            <img id="img-prenda" style="display:none;">
+                            <input type="file" id="file-prenda" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(this, 'img-prenda', 'label-prenda')">
+                        </div>
+                    </div>
+                    <div class="col" style="width: 50%;">
+                        <label>Foto Etiqueta</label>
+                        <div class="photo-container" onclick="document.getElementById('file-etiqueta').click()">
+                            <span id="label-etiqueta">🏷️ Capturar Ticket</span>
+                            <img id="img-etiqueta" style="display:none;">
+                            <input type="file" id="file-etiqueta" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(this, 'img-etiqueta', 'label-etiqueta')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-box">
+                    <div class="result-row">
+                        <span>Costo Real Final:</span>
+                        <span id="calc-costo-real">$0.00 MXN</span>
+                    </div>
+                    <div class="result-row total">
+                        <span>Precio Sugerido:</span>
+                        <span id="calc-precio-sugerido">$0.00 MXN</span>
+                    </div>
+                    <div class="result-row" style="margin-top: 4px; font-size: 0.75rem;">
+                        <span>Ganancia Neta:</span>
+                        <span style="color: #10b981; font-weight: 700;" id="calc-ganancia">$0.00 MXN</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">📣 Compartir en WhatsApp</div>
+                <button class="btn-primary" onclick="copyToClipboardAndShare()">
+                    📥 Guardar Foto y Abrir WhatsApp
+                </button>
+
+                <div style="border-top: 1px solid var(--border-color); margin: 14px 0;"></div>
+
+                <div class="card-title" style="font-size: 0.95rem;">📌 ¿Ya la apartaron?</div>
+                <div class="form-group">
+                    <label for="client-name">Nombre de la Clienta</label>
+                    <input type="text" id="client-name" placeholder="Ej. María López">
+                </div>
+                <button class="btn-secondary" onclick="saveOrder()">
+                    💾 Guardar en Lista de Entregas
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: LISTA DE ENTREGAS CON INDEXEDDB -->
+    <div id="page-orders" class="page">
+        <header>
+            <h1>Checklist de Entregas</h1>
+            <p>Control Seguro con IndexedDB</p>
+        </header>
+
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Pedidos</div>
+                    <div class="stat-value" id="stat-total">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Pendientes</div>
+                    <div class="stat-value" id="stat-pending">0</div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+                <button class="btn-success btn-small" style="flex: 1; margin-top: 0;" onclick="exportToCSV()">📊 Exportar CSV</button>
+                <button class="btn-success btn-small" style="flex: 1; margin-top: 0;" onclick="exportToPDF()">📄 Exportar PDF</button>
+                <button class="btn-small btn-danger" style="margin-top: 0;" onclick="clearAllOrders()">🚨 Limpiar</button>
+            </div>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterOrders('all')">📋 Todos</button>
+                <button class="filter-btn" onclick="filterOrders('pendiente')">⏳ Pendientes</button>
+                <button class="filter-btn" onclick="filterOrders('entregado')">✓ Entregados</button>
+            </div>
+
+            <div id="orders-list-container"></div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: CONFIGURACIÓN AVANZADA -->
+    <div id="page-settings" class="page">
+        <header>
+            <h1>⚙️ Configuración</h1>
+            <p>Variables de Negocio</p>
+        </header>
+
+        <div class="container">
+            <div class="card">
+                <div class="card-title">💰 Ajustes de Costos</div>
+                
+                <div class="config-section">
+                    <div class="config-title">Tipo de Cambio (MXN → USD)</div>
+                    <div class="config-desc">Define cuántos pesos mexicanos equivalen a 1 dólar estadounidense</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cfg-tc">Tipo de Cambio</label>
+                    <input type="number" id="cfg-tc" step="0.01" placeholder="18.50">
+                </div>
+
+                <div class="config-section">
+                    <div class="config-title">Sales Tax (USA)</div>
+                    <div class="config-desc">Impuesto de venta que se añade en la tienda estadounidense</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cfg-tax">Sales Tax (%)</label>
+                    <input type="number" id="cfg-tax" step="0.1" placeholder="9">
+                </div>
+
+                <div class="config-section">
+                    <div class="config-title">Costo de Maleta</div>
+                    <div class="config-desc">Gasto prorrateado por prenda para traerlas en maleta</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cfg-maleta">Costo por Prenda ($MXN)</label>
+                    <input type="number" id="cfg-maleta" step="1" placeholder="38">
+                </div>
+
+                <button class="btn-primary" onclick="saveSettings()">💾 Guardar Cambios</button>
+            </div>
+
+            <div class="card">
+                <div class="card-title">🔐 Seguridad</div>
+                <div class="config-section">
+                    <div class="config-title">PIN de Protección</div>
+                    <div class="config-desc">Protege los ajustes contra cambios accidentales</div>
+                </div>
+                <button class="btn-secondary" onclick="openPinSettings()">🔑 Cambiar PIN</button>
+            </div>
+
+            <div class="card">
+                <div class="card-title">📊 Datos & Privacidad</div>
+                <button class="btn-secondary" onclick="backupData()">☁️ Crear Respaldo</button>
+                <button class="btn-secondary" onclick="downloadDiagnostics()">📋 Descargar Diagnóstico</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABS DE NAVEGACIÓN -->
+    <nav class="nav-tabs">
+        <button id="tab-calc" class="tab-item active" onclick="switchTab('calc')">
+            <span class="tab-icon">🛍️</span>
+            <span>Captura</span>
+        </button>
+        <button id="tab-orders" class="tab-item" onclick="switchTab('orders')">
+            <span class="tab-icon">📋</span>
+            <span>Entregas</span>
+            <span id="badge-orders-count" class="badge-count" style="display: none;">0</span>
+        </button>
+        <button id="tab-settings" class="tab-item" onclick="switchTab('settings')">
+            <span class="tab-icon">⚙️</span>
+            <span>Ajustes</span>
+        </button>
+    </nav>
+
+    <script>
+        // ============================================
+        // SISTEMA DE ALMACENAMIENTO INDEXEDDB
+        // ============================================
+        let db;
+        let currentFilter = 'all';
+        let currentItemPhotos = { prenda: null, etiqueta: null };
+
+        // Inicializar IndexedDB
+        const dbRequest = indexedDB.open("VentasItzelDB", 2);
+        
+        dbRequest.onupgradeneeded = function(e) {
+            db = e.target.result;
+            if (!db.objectStoreNames.contains("orders")) {
+                db.createObjectStore("orders", { keyPath: "id" });
+            }
+            if (!db.objectStoreNames.contains("settings")) {
+                db.createObjectStore("settings", { keyPath: "key" });
+            }
+        };
+
+        dbRequest.onsuccess = function(e) {
+            db = e.target.result;
+            loadSettings();
+            updateOrderBadges();
+        };
+
+        dbRequest.onerror = function() {
+            showToast("❌ Error al inicializar la base de datos", "error");
+        };
+
+        // ============================================
+        // GESTIÓN DE CONFIGURACIÓN
+        // ============================================
+        let appSettings = {
+            tc: 18.50,
+            tax: 9.0,
+            maleta: 38.0,
+            pin: "0000"
+        };
+
+        function loadSettings() {
+            if (!db) return;
+            const tx = db.transaction(["settings"], "readonly");
+            const store = tx.objectStore("settings");
+            
+            ['tc', 'tax', 'maleta', 'pin'].forEach(key => {
+                store.get(key).onsuccess = function(e) {
+                    const data = e.target.result;
+                    if (data) appSettings[key] = data.value;
+                };
+            });
+
+            tx.oncomplete = function() {
+                initSettingsFields();
+            };
+        }
+
+        function initSettingsFields() {
+            document.getElementById('cfg-tc').value = appSettings.tc;
+            document.getElementById('cfg-tax').value = appSettings.tax;
+            document.getElementById('cfg-maleta').value = appSettings.maleta;
+            
+            document.getElementById('lbl-tc').innerText = `$${appSettings.tc.toFixed(2)}`;
+            document.getElementById('lbl-tax').innerText = `${appSettings.tax}%`;
+            document.getElementById('lbl-maleta').innerText = `$${appSettings.maleta}`;
+        }
+
+        function saveSettings() {
+            const tc = parseFloat(document.getElementById('cfg-tc').value) || 18.50;
+            const tax = parseFloat(document.getElementById('cfg-tax').value) || 9.0;
+            const maleta = parseFloat(document.getElementById('cfg-maleta').value) || 38.0;
+
+            if (tc <= 0 || tax < 0 || maleta < 0) {
+                showToast("❌ Los valores no pueden ser negativos o cero", "error");
+                return;
+            }
+
+            const settings = [
+                { key: 'tc', value: tc },
+                { key: 'tax', value: tax },
+                { key: 'maleta', value: maleta }
+            ];
+
+            const tx = db.transaction(["settings"], "readwrite");
+            const store = tx.objectStore("settings");
+            
+            settings.forEach(s => {
+                store.put(s);
+            });
+
+            tx.oncomplete = function() {
+                appSettings.tc = tc;
+                appSettings.tax = tax;
+                appSettings.maleta = maleta;
+                initSettingsFields();
+                calculatePrice();
+                showToast("✅ Configuración guardada", "success");
+                switchTab('calc');
+            };
+        }
+
+        // ============================================
+        // PIN DE SEGURIDAD
+        // ============================================
+        let pinAttempt = "";
+
+        function openPinSettings() {
+            document.getElementById('pinModal').classList.add('active');
+            renderPinInputs();
+        }
+
+        function closePinModal() {
+            document.getElementById('pinModal').classList.remove('active');
+            pinAttempt = "";
+        }
+
+        function renderPinInputs() {
+            const group = document.getElementById('pinInputGroup');
+            group.innerHTML = "";
+            for (let i = 0; i < 4; i++) {
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.min = '0';
+                input.max = '9';
+                input.className = 'pin-input';
+                input.maxLength = '1';
+                input.dataset.index = i;
+                
+                input.addEventListener('input', (e) => {
+                    if (e.target.value.length === 1 && i < 3) {
+                        group.children[i + 1].focus();
+                    }
+                    updatePinAttempt();
+                });
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && i > 0) {
+                        group.children[i - 1].focus();
+                    }
+                });
+
+                group.appendChild(input);
+            }
+        }
+
+        function updatePinAttempt() {
+            const inputs = Array.from(document.querySelectorAll('.pin-input'));
+            pinAttempt = inputs.map(i => i.value).join('');
+            
+            if (pinAttempt.length === 4) {
+                if (pinAttempt === appSettings.pin) {
+                    showToast("✅ PIN correcto", "success");
+                    setTimeout(() => {
+                        closePinModal();
+                        promptNewPin();
+                    }, 500);
+                } else {
+                    showToast("❌ PIN incorrecto", "error");
+                    pinAttempt = "";
+                    renderPinInputs();
+                }
+            }
+        }
+
+        function promptNewPin() {
+            const newPin = prompt("Ingresa tu nuevo PIN (4 dígitos):");
+            if (newPin && /^\d{4}$/.test(newPin)) {
+                const tx = db.transaction(["settings"], "readwrite");
+                tx.objectStore("settings").put({ key: 'pin', value: newPin });
+                tx.oncomplete = function() {
+                    appSettings.pin = newPin;
+                    showToast("✅ PIN actualizado", "success");
+                };
+            } else if (newPin) {
+                showToast("❌ El PIN debe ser exactamente 4 dígitos", "error");
+            }
+        }
+
+        // ============================================
+        // CÁLCULO DE PRECIOS
+        // ============================================
+        function getPrices(usdPrice) {
+            if (!usdPrice || usdPrice <= 0) return { costoReal: 0, sugerido: 0, ganancia: 0 };
+            
+            const taxValue = usdPrice * (appSettings.tax / 100);
+            const totalUSD = usdPrice + taxValue;
+            const totalMXN = totalUSD * appSettings.tc;
+            const costoReal = totalMXN + appSettings.maleta;
+
+            let sugerido = 0;
+            const p = parseFloat(usdPrice);
+
+            const priceTable = [
+                { max: 1.00, price: 150 },
+                { max: 2.00, price: 180 },
+                { max: 3.00, price: 220 },
+                { max: 4.00, price: 250 },
+                { max: 5.00, price: 280 },
+                { max: 6.00, price: 320 },
+                { max: 7.00, price: 350 },
+                { max: 8.00, price: 380 },
+                { max: 9.00, price: 400 },
+                { max: 10.00, price: 450 },
+                { max: 12.00, price: 500 },
+                { max: 15.00, price: 600 },
+                { max: 20.00, price: 750 },
+                { max: 25.00, price: 900 },
+                { max: 30.00, price: 1100 }
+            ];
+
+            for (let tier of priceTable) {
+                if (p <= tier.max) {
+                    sugerido = tier.price;
+                    break;
+                }
+            }
+
+            if (p > 30) {
+                sugerido = Math.ceil((costoReal * 1.45) / 10) * 10;
+            }
+
+            return {
+                costoReal: Math.round(costoReal),
+                sugerido: sugerido,
+                ganancia: Math.round(sugerido - costoReal)
+            };
+        }
+
+        function calculatePrice() {
+            const usdPrice = parseFloat(document.getElementById('usd-price').value);
+            const results = getPrices(usdPrice);
+
+            document.getElementById('calc-costo-real').innerText = `$${results.costoReal.toLocaleString('es-MX')} MXN`;
+            document.getElementById('calc-precio-sugerido').innerText = `$${results.sugerido.toLocaleString('es-MX')} MXN`;
+            document.getElementById('calc-ganancia').innerText = `$${results.ganancia.toLocaleString('es-MX')} MXN`;
+        }
+
+        // ============================================
+        // MANEJO DE FOTOS CON COMPRESIÓN
+        // ============================================
+        function handlePhoto(input, imgId, labelId) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const labelEl = document.getElementById(labelId);
+            labelEl.innerText = "⏳ Procesando...";
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 550;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > MAX_WIDTH) {
+                        height = Math.round((height * MAX_WIDTH) / width);
+                        width = MAX_WIDTH;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.75);
+                    
+                    const targetImg = document.getElementById(imgId);
+                    targetImg.src = compressedBase64;
+                    targetImg.style.display = 'block';
+                    labelEl.style.display = 'none';
+
+                    if (imgId === 'img-prenda') currentItemPhotos.prenda = compressedBase64;
+                    if (imgId === 'img-etiqueta') currentItemPhotos.etiqueta = compressedBase64;
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // ============================================
+        // COMPARTIR EN WHATSAPP
+        // ============================================
+        function copyToClipboardAndShare() {
+            const usdPrice = document.getElementById('usd-price').value;
+            const size = document.getElementById('item-size').value;
+            const desc = document.getElementById('item-desc').value;
+            const prices = getPrices(parseFloat(usdPrice));
+
+            if (!usdPrice) {
+                showToast("❌ Introduce el precio en dólares", "error");
+                return;
+            }
+
+            if (currentItemPhotos.prenda) {
+                const downloadLink = document.createElement("a");
+                downloadLink.href = currentItemPhotos.prenda;
+                downloadLink.download = `Venta_${size}_$${prices.sugerido}MXN.jpg`;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            }
+
+            let textToCopy = `✨ ¡DISPONIBLE EN TIENDA! ✨\n`;
+            if (desc && desc.trim() !== "") textToCopy += `👗 Prenda: ${desc}\n`;
+            if (size !== "N/A") textToCopy += `📏 Talla: ${size}\n`;
+            textToCopy += `💵 Precio: $${prices.sugerido} MXN\n\n¡Pídela ya por mensaje! 🛍️✨`;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showToast("✅ Foto descargada y texto copiado", "success");
+                setTimeout(() => {
+                    window.location.href = "whatsapp://send";
+                }, 600);
+            }).catch(() => {
+                showToast("❌ Error al copiar", "error");
+            });
+        }
+
+        // ============================================
+        // GUARDADO DE PEDIDOS
+        // ============================================
+        function saveOrder() {
+            const usdPrice = parseFloat(document.getElementById('usd-price').value);
+            const client = document.getElementById('client-name').value;
+            const size = document.getElementById('item-size').value;
+            const desc = document.getElementById('item-desc').value;
+
+            if (!usdPrice || !client) {
+                showToast("❌ Completa precio y nombre", "error");
+                return;
+            }
+
+            const prices = getPrices(usdPrice);
+            const newOrder = {
+                id: Date.now(),
+                client: client,
+                desc: desc || "Ropa de Niños",
+                size: size,
+                usdPrice: usdPrice,
+                finalPrice: prices.sugerido,
+                photoPrenda: currentItemPhotos.prenda,
+                photoEtiqueta: currentItemPhotos.etiqueta,
+                status: 'pendiente',
+                createdAt: new Date().toISOString()
+            };
+
+            const tx = db.transaction(["orders"], "readwrite");
+            const store = tx.objectStore("orders");
+            store.add(newOrder);
+
+            tx.oncomplete = function() {
+                document.getElementById('client-name').value = "";
+                document.getElementById('usd-price').value = "";
+                document.getElementById('item-desc').value = "";
+                document.getElementById('item-size').value = "N/A";
+                document.getElementById('img-prenda').style.display = 'none';
+                document.getElementById('img-etiqueta').style.display = 'none';
+                document.getElementById('label-prenda').style.display = 'block';
+                document.getElementById('label-prenda').innerText = "📸 Tomar Foto";
+                document.getElementById('label-etiqueta').style.display = 'block';
+                document.getElementById('label-etiqueta').innerText = "🏷️ Capturar Ticket";
+                
+                currentItemPhotos = { prenda: null, etiqueta: null };
+                calculatePrice();
+                updateOrderBadges();
+                showToast("✅ Pedido guardado en IndexedDB", "success");
+            };
+        }
+
+        // ============================================
+        // GESTIÓN DE PEDIDOS
+        // ============================================
+        function updateOrderBadges() {
+            if (!db) return;
+            const tx = db.transaction(["orders"], "readonly");
+            const store = tx.objectStore("orders");
+            store.getAll().onsuccess = function(e) {
+                const orders = e.target.result;
+                const pending = orders.filter(o => o.status === 'pendiente').length;
+                const total = orders.length;
+
+                document.getElementById('badge-orders-count').innerText = pending;
+                if (pending > 0) {
+                    document.getElementById('badge-orders-count').style.display = 'block';
+                } else {
+                    document.getElementById('badge-orders-count').style.display = 'none';
+                }
+
+                document.getElementById('stat-total').innerText = total;
+                document.getElementById('stat-pending').innerText = pending;
+            };
+        }
+
+        function renderOrders() {
+            const container = document.getElementById('orders-list-container');
+            container.innerHTML = "<div style='text-align:center; padding:20px;'>⏳ Cargando...</div>";
+
+            const tx = db.transaction(["orders"], "readonly");
+            const store = tx.objectStore("orders");
+            store.getAll().onsuccess = function(e) {
+                const orders = e.target.result;
+                let filtered = orders;
+
+                if (currentFilter !== 'all') {
+                    filtered = orders.filter(o => o.status === currentFilter);
+                }
+
+                container.innerHTML = "";
+
+                if (filtered.length === 0) {
+                    container.innerHTML = `<div style="text-align:center; padding:40px 20px; color:var(--text-muted);">
+                        📭 No hay pedidos en esta categoría
+                    </div>`;
+                    return;
+                }
+
+                filtered.reverse().forEach(order => {
+                    const card = document.createElement('div');
+                    card.className = 'order-card';
+                    
+                    const thumbSrc = order.photoPrenda || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="%23cbd5e1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+
+                    card.innerHTML = `
+                        <div class="order-header">
+                            <span class="order-client">👤 ${order.client}</span>
+                            <span class="order-status status-${order.status}">${order.status === 'pendiente' ? '⏳ PENDIENTE' : '✓ ENTREGADO'}</span>
+                        </div>
+                        <div class="order-body">
+                            <img class="order-thumb" src="${thumbSrc}" onclick="viewImage('${thumbSrc}')">
+                            <div class="order-info">
+                                <div style="color:var(--text-main); font-weight:500;">${order.desc}</div>
+                                <div>Talla: <b>${order.size}</b> | USD: $${order.usdPrice}</div>
+                                ${order.photoEtiqueta ? `<div style="font-size:0.75rem; color:#6366f1; cursor:pointer;" onclick="viewImage('${order.photoEtiqueta}')">🏷️ Ver Ticket</div>` : ''}
+                                <div class="order-price">$${order.finalPrice} MXN</div>
+                            </div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn-small btn-primary" style="background-color:var(--success);" onclick="toggleStatus(${order.id})">✓ Cambiar</button>
+                            <button class="btn-small btn-danger" onclick="deleteOrder(${order.id})">🗑️ Borrar</button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            };
+        }
+
+        function toggleStatus(id) {
+            const tx = db.transaction(["orders"], "readwrite");
+            const store = tx.objectStore("orders");
+            store.get(id).onsuccess = function(e) {
+                const data = e.target.result;
+                data.status = data.status === 'pendiente' ? 'entregado' : 'pendiente';
+                store.put(data);
+                tx.oncomplete = function() {
+                    renderOrders();
+                    updateOrderBadges();
+                };
+            };
+        }
+
+        function deleteOrder(id) {
+            if (confirm("¿Eliminar este registro?")) {
+                const tx = db.transaction(["orders"], "readwrite");
+                tx.objectStore("orders").delete(id);
+                tx.oncomplete = function() {
+                    renderOrders();
+                    updateOrderBadges();
+                    showToast("✅ Pedido eliminado", "success");
+                };
+            }
+        }
+
+        function clearAllOrders() {
+            if (confirm("🚨 ¿Borrar TODOS los pedidos? Esta acción no se puede deshacer.")) {
+                const tx = db.transaction(["orders"], "readwrite");
+                tx.objectStore("orders").clear();
+                tx.oncomplete = function() {
+                    renderOrders();
+                    updateOrderBadges();
+                    showToast("✅ Base de datos limpiada", "success");
+                };
+            }
+        }
+
+        function filterOrders(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderOrders();
+        }
+
+        // ============================================
+        // EXPORTACIÓN DE DATOS
+        // ============================================
+        function exportToCSV() {
+            const tx = db.transaction(["orders"], "readonly");
+            tx.objectStore("orders").getAll().onsuccess = function(e) {
+                const data = e.target.result;
+                if (data.length === 0) {
+                    showToast("❌ No hay datos para exportar", "error");
+                    return;
+                }
+
+                let csvContent = "\uFEFF";
+                csvContent += "Fecha,Cliente,Descripción,Talla,Precio USD,Precio MXN,Estado,Ganancia\n";
+
+                data.forEach(o => {
+                    const date = new Date(o.createdAt).toLocaleDateString('es-MX');
+                    const ganancia = o.finalPrice - Math.round((o.usdPrice * (1 + appSettings.tax/100) * appSettings.tc) + appSettings.maleta);
+                    csvContent += `${date},"${o.client}","${o.desc}",${o.size},${o.usdPrice},${o.finalPrice},${o.status},${ganancia}\n`;
+                });
+
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = `Ventas_Itzel_${new Date().toISOString().split('T')[0]}.csv`;
+                link.click();
+                showToast("✅ CSV exportado", "success");
+            };
+        }
+
+        function exportToPDF() {
+            showToast("📄 Generando PDF...", "info");
+            const tx = db.transaction(["orders"], "readonly");
+            tx.objectStore("orders").getAll().onsuccess = function(e) {
+                const data = e.target.result;
+                if (data.length === 0) {
+                    showToast("❌ No hay datos para exportar", "error");
+                    return;
+                }
+
+                let pdfContent = "%PDF-1.4\n";
+                pdfContent += "1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj\n";
+                pdfContent += "2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj\n";
+                pdfContent += "3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Contents 4 0 R/Resources<</Font<</F1 5 0 R>>>>>>endobj\n";
+                pdfContent += "4 0 obj<</Length 1000>>stream\nBT /F1 10 Tf 50 750 Td (Reporte Ventas Itzel Beltrán) Tj 0 -20 Td\n";
+                
+                data.forEach((o, idx) => {
+                    pdfContent += `(${o.client} - ${o.desc} - $${o.finalPrice}) Tj 0 -15 Td\n`;
+                });
+
+                pdfContent += "ET\nendstream\nendobj\n";
+                pdfContent += "5 0 obj<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>endobj\n";
+                pdfContent += "xref\n0 6\n";
+
+                const blob = new Blob([pdfContent], { type: 'application/pdf' });
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = `Ventas_Itzel_${new Date().toISOString().split('T')[0]}.pdf`;
+                link.click();
+                showToast("✅ PDF exportado", "success");
+            };
+        }
+
+        function backupData() {
+            const tx = db.transaction(["orders", "settings"], "readonly");
+            const backup = {
+                orders: [],
+                settings: appSettings,
+                timestamp: new Date().toISOString()
+            };
+
+            tx.objectStore("orders").getAll().onsuccess = function(e) {
+                backup.orders = e.target.result;
+                
+                const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = `Backup_Ventas_Itzel_${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                showToast("✅ Respaldo creado", "success");
+            };
+        }
+
+        function downloadDiagnostics() {
+            const diag = {
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                storage: {
+                    indexedDB: !!window.indexedDB,
+                    localStorage: !!window.localStorage
+                },
+                settings: appSettings
+            };
+
+            const blob = new Blob([JSON.stringify(diag, null, 2)], { type: 'application/json' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `Diagnostico_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+        }
+
+        // ============================================
+        // UI UTILITIES
+        // ============================================
+        function switchTab(tab) {
+            document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+            
+            const pageMap = {
+                'calc': { page: 'page-calc', tab: 'tab-calc' },
+                'orders': { page: 'page-orders', tab: 'tab-orders' },
+                'settings': { page: 'page-settings', tab: 'tab-settings' }
+            };
+
+            if (pageMap[tab]) {
+                document.getElementById(pageMap[tab].page).classList.add('active');
+                document.getElementById(pageMap[tab].tab).classList.add('active');
+                if (tab === 'orders') renderOrders();
+                if (tab === 'settings') initSettingsFields();
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.className = `alert-toast toast-${type}`;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+
+        function viewImage(src) {
+            document.getElementById('modalImage').src = src;
+            document.getElementById('imageModal').classList.add('active');
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
+
+        // Cerrar modales con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+                closePinModal();
+            }
+        });
+
+        // Inicialización
+        window.addEventListener('load', function() {
+            if (!db) {
+                setTimeout(() => {
+                    loadSettings();
+                    updateOrderBadges();
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>
