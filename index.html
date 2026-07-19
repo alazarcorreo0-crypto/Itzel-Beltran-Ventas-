@@ -372,7 +372,6 @@
             display: none;
         }
 
-        /* Modal Simple de Imagen */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -385,7 +384,6 @@
         .modal-overlay.active { display: flex; }
         .modal-content img { max-width: 90vw; max-height: 90vh; border-radius: 8px; }
 
-        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -436,7 +434,6 @@
 
     <div id="toast" class="alert-toast">¡Texto copiado e Imagen lista en tu Galería!</div>
 
-    <!-- Modal visor de Imagen -->
     <div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
         <div class="modal-content">
             <img id="modalImage" src="">
@@ -460,7 +457,7 @@
                     <div>💵 TC:<br><b id="lbl-tc">$18.50</b></div>
                     <div>📈 Tax:<br><b id="lbl-tax">9%</b></div>
                     <div>🧳 Maleta:<br><b id="lbl-maleta">$38</b></div>
-                    <div>💰 Margen:<br><b id="lbl-margen">40%</b></div>
+                    <div>💰 Margen:<br><b id="lbl-margen">45%</b></div>
                 </div>
             </div>
 
@@ -470,7 +467,7 @@
                 
                 <div class="form-group">
                     <label for="usd-price">Precio en Tienda (USD etiqueta)</label>
-                    <input type="number" id="usd-price" step="0.01" placeholder="Ej. 14.99" oninput="calculatePrice()">
+                    <input type="number" id="usd-price" pattern="[0-9]*" inputmode="decimal" placeholder="Ej. 14.99" oninput="calculatePrice()">
                 </div>
 
                 <div class="row">
@@ -558,7 +555,7 @@
         </div>
     </div>
 
-    <!-- PÁGINA 2: LISTA DE ENTREGAS (INDEXEDDB RESPONSIVO) -->
+    <!-- PÁGINA 2: LISTA DE ENTREGAS -->
     <div id="page-orders" class="page">
         <header>
             <h1>Checklist de Entregas</h1>
@@ -601,7 +598,7 @@
                     <div class="config-desc">Define la conversión de dólares a pesos</div>
                 </div>
                 <div class="form-group">
-                    <input type="number" id="cfg-tc" step="0.01">
+                    <input type="number" id="cfg-tc" pattern="[0-9]*" inputmode="decimal" step="0.01">
                 </div>
 
                 <div class="config-section">
@@ -609,7 +606,7 @@
                     <div class="config-desc">Impuesto aplicado en la caja de la tienda</div>
                 </div>
                 <div class="form-group">
-                    <input type="number" id="cfg-tax" step="0.1">
+                    <input type="number" id="cfg-tax" pattern="[0-9]*" inputmode="decimal" step="0.1">
                 </div>
 
                 <div class="config-section">
@@ -617,7 +614,7 @@
                     <div class="config-desc">Gasto logístico fijo por prenda</div>
                 </div>
                 <div class="form-group">
-                    <input type="number" id="cfg-maleta" step="1">
+                    <input type="number" id="cfg-maleta" pattern="[0-9]*" inputmode="numeric" step="1">
                 </div>
 
                 <div class="config-section">
@@ -625,7 +622,7 @@
                     <div class="config-desc">Porcentaje neto de ganancia sobre el costo real</div>
                 </div>
                 <div class="form-group">
-                    <input type="number" id="cfg-margen" step="1">
+                    <input type="number" id="cfg-margen" pattern="[0-9]*" inputmode="numeric" step="1">
                 </div>
 
                 <button class="btn-primary" onclick="saveSettings()">💾 Guardar Configuración</button>
@@ -651,12 +648,12 @@
     </nav>
 
     <script>
-        // --- MOTOR LOGICIAL DE CONFIGURACIONES ---
+        // --- CONFIGURACIÓN BASE POR DEFECTO ---
         let appSettings = JSON.parse(localStorage.getItem('itb_settings')) || {
             tc: 18.50,
             tax: 9.0,
             maleta: 38.0,
-            margen: 40.0
+            margen: 45.0
         };
 
         function initSettingsFields() {
@@ -671,20 +668,7 @@
             document.getElementById('lbl-margen').innerText = `${appSettings.margen}%`;
         }
 
-        function saveSettings() {
-            appSettings.tc = parseFloat(document.getElementById('cfg-tc').value) || 18.50;
-            appSettings.tax = parseFloat(document.getElementById('cfg-tax').value) || 9.0;
-            appSettings.maleta = parseFloat(document.getElementById('cfg-maleta').value) || 38.0;
-            appSettings.margen = parseFloat(document.getElementById('cfg-margen').value) || 40.0;
-            
-            localStorage.setItem('itb_settings', JSON.stringify(appSettings));
-            initSettingsFields();
-            calculatePrice();
-            alert("¡Variables de negocio guardadas!");
-            switchTab('calc');
-        }
-
-        // --- INICIALIZADOR INDEXEDDB (ESPACIO FOTOS ILIMITADO) ---
+        // --- INICIALIZADOR INDEXEDDB ---
         let db;
         const dbReq = indexedDB.open("VentasItzelDB", 3);
         
@@ -693,12 +677,73 @@
             if (!db.objectStoreNames.contains("orders")) {
                 db.createObjectStore("orders", { keyPath: "id" });
             }
+            if (!db.objectStoreNames.contains("settings")) {
+                db.createObjectStore("settings", { keyPath: "key" });
+            }
         };
 
         dbReq.onsuccess = function(e) {
             db = e.target.result;
+            loadSettings();
             updateOrderBadges();
         };
+
+        function loadSettings() {
+            if (!db) return;
+            const tx = db.transaction(["settings"], "readonly");
+            const store = tx.objectStore("settings");
+            
+            let localBackup = JSON.parse(localStorage.getItem('itb_settings')) || appSettings;
+            
+            ['tc', 'tax', 'maleta', 'margen'].forEach(key => {
+                store.get(key).onsuccess = function(e) {
+                    const data = e.target.result;
+                    if (data) {
+                        appSettings[key] = parseFloat(data.value);
+                    } else {
+                        appSettings[key] = parseFloat(localBackup[key]);
+                    }
+                };
+            });
+
+            tx.oncomplete = function() {
+                initSettingsFields();
+                calculatePrice();
+            };
+        }
+
+        function saveSettings() {
+            const tc = parseFloat(document.getElementById('cfg-tc').value);
+            const tax = parseFloat(document.getElementById('cfg-tax').value);
+            const maleta = parseFloat(document.getElementById('cfg-maleta').value);
+            const margen = parseFloat(document.getElementById('cfg-margen').value);
+
+            if (isNaN(tc) || isNaN(tax) || isNaN(maleta) || isNaN(margen) || tc <= 0 || tax < 0 || maleta < 0 || margen < 0) {
+                alert("❌ Por favor introduce números válidos mayores o iguales a cero.");
+                return;
+            }
+
+            appSettings.tc = tc;
+            appSettings.tax = tax;
+            appSettings.maleta = maleta;
+            appSettings.margen = margen;
+            
+            localStorage.setItem('itb_settings', JSON.stringify(appSettings));
+
+            const tx = db.transaction(["settings"], "readwrite");
+            const store = tx.objectStore("settings");
+            store.put({ key: 'tc', value: tc });
+            store.put({ key: 'tax', value: tax });
+            store.put({ key: 'maleta', value: maleta });
+            store.put({ key: 'margen', value: margen });
+
+            tx.oncomplete = function() {
+                initSettingsFields();
+                calculatePrice();
+                alert("¡Configuración guardada en bases de datos!");
+                switchTab('calc');
+            };
+        }
 
         let currentItemPhotos = { prenda: null, etiqueta: null };
 
@@ -716,6 +761,7 @@
             } else {
                 document.getElementById('page-settings').classList.add('active');
                 document.getElementById('tab-settings').classList.add('active');
+                initSettingsFields();
             }
         }
 
@@ -723,16 +769,12 @@
         function getPrices(usdPrice) {
             if (!usdPrice || usdPrice <= 0) return { costoReal: 0, sugerido: 0, ganancia: 0 };
             
-            // 1. Desglose exacto del costo en pesos
             const taxValue = usdPrice * (appSettings.tax / 100);
             const totalUSD = usdPrice + taxValue;
             const totalMXN = totalUSD * appSettings.tc;
             const costoReal = totalMXN + appSettings.maleta;
 
-            // 2. Aplicar el margen configurado dinámicamente
             let sugeridoRaw = costoReal * (1 + (appSettings.margen / 100));
-            
-            // Redondear a la decena superior estética (ej: 432 -> 440)
             let sugerido = Math.ceil(sugeridoRaw / 10) * 10;
 
             return {
@@ -968,6 +1010,7 @@
             }
         }
 
+        // --- SISTEMA CORREGIDO: EXPORTACIÓN EN LATIN1 / COMPATIBLE CON EXCEL ---
         function exportToCSV() {
             const store = db.transaction(["orders"], "readonly").objectStore("orders");
             store.getAll().onsuccess = function(e) {
@@ -996,8 +1039,9 @@
             document.getElementById('imageModal').classList.remove('active');
         }
 
-        // Inicialización base
-        initSettingsFields();
+        window.addEventListener('load', function() {
+            initSettingsFields();
+        });
     </script>
 </body>
 </html>
