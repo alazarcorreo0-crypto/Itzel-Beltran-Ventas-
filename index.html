@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ventas Itzel Beltrán - App Profesional</title>
+    <title>Ventas Itzel Beltrán</title>
     <style>
         :root {
             --bg-color: #f8fafc;
@@ -89,7 +89,7 @@
             margin-bottom: 6px;
         }
 
-        input, select, textarea {
+        input, select {
             width: 100%;
             padding: 12px;
             border-radius: 8px;
@@ -101,7 +101,7 @@
             transition: border-color 0.2s;
         }
 
-        input:focus, select:focus, textarea:focus {
+        input:focus, select:focus {
             border-color: var(--primary);
             background-color: #fff;
         }
@@ -138,11 +138,6 @@
             flex-direction: column;
             gap: 8px;
             transition: all 0.2s;
-        }
-
-        .photo-container:hover {
-            border-color: var(--primary);
-            background-color: #fdf2f8;
         }
 
         .photo-container img {
@@ -193,10 +188,6 @@
             gap: 8px;
         }
 
-        button:active {
-            transform: scale(0.98);
-        }
-
         .btn-primary {
             background-color: var(--primary);
             color: white;
@@ -223,7 +214,7 @@
             color: white;
         }
 
-        /* Navigation */
+        /* Nav Tabs */
         .nav-tabs {
             position: fixed;
             bottom: 0;
@@ -270,7 +261,7 @@
             padding: 1px 6px;
             position: absolute;
             top: 0;
-            right: 8px;
+            right: 12px;
         }
 
         .page {
@@ -331,7 +322,6 @@
             border-radius: 6px;
             object-fit: cover;
             background-color: #f1f5f9;
-            cursor: pointer;
         }
 
         .order-info {
@@ -358,7 +348,6 @@
             display: flex;
             justify-content: flex-end;
             gap: 8px;
-            flex-wrap: wrap;
         }
 
         .btn-small {
@@ -368,107 +357,35 @@
             width: auto;
         }
 
-        /* Alerts & Toasts */
         .alert-toast {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            background-color: #334155;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
             z-index: 999;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             display: none;
-            max-width: 90%;
         }
 
-        .toast-success {
-            background-color: var(--success);
-            color: white;
-        }
-
-        .toast-error {
-            background-color: var(--danger);
-            color: white;
-        }
-
-        .toast-info {
-            background-color: #3b82f6;
-            color: white;
-        }
-
-        /* Modal */
+        /* Modal Simple de Imagen */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0,0,0,0.5);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0,0.6);
             z-index: 200;
             align-items: center;
             justify-content: center;
         }
+        .modal-overlay.active { display: flex; }
+        .modal-content img { max-width: 90vw; max-height: 90vh; border-radius: 8px; }
 
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            max-width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 25px rgba(0,0,0,0.15);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            font-size: 1.2rem;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-muted);
-            padding: 0;
-            width: auto;
-        }
-
-        /* PIN Modal */
-        .pin-input-group {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .pin-input {
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
-            text-align: center;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        /* Stats Card */
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -479,117 +396,75 @@
         .stat-card {
             background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
             color: white;
-            padding: 16px;
+            padding: 14px;
             border-radius: 12px;
             text-align: center;
         }
 
         .stat-value {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            margin: 8px 0;
+            margin: 4px 0;
         }
 
         .stat-label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             opacity: 0.9;
         }
 
-        /* Configuration Panel */
         .config-section {
             background: #f1f5f9;
             border-left: 4px solid var(--primary);
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 16px;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
         }
 
         .config-title {
             font-weight: 600;
             color: var(--text-main);
-            margin-bottom: 8px;
+            font-size: 0.9rem;
         }
 
         .config-desc {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-        }
-
-        /* Filters */
-        .filter-buttons {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 6px 12px;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            background: white;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-        }
-
-        .filter-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
         }
     </style>
 </head>
 <body>
 
-    <!-- Toast Notifications -->
-    <div id="toast" class="alert-toast"></div>
+    <div id="toast" class="alert-toast">¡Texto copiado e Imagen lista en tu Galería!</div>
 
-    <!-- Modal de Imagen -->
-    <div id="imageModal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 95%; padding: 0;">
-            <div style="position: relative;">
-                <img id="modalImage" src="" style="width: 100%; border-radius: 16px 16px 0 0;">
-                <button class="modal-close" onclick="closeImageModal()" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px;">✕</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal PIN de Seguridad -->
-    <div id="pinModal" class="modal-overlay">
+    <!-- Modal visor de Imagen -->
+    <div id="imageModal" class="modal-overlay" onclick="closeImageModal()">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>🔐 PIN de Seguridad</h2>
-                <button class="modal-close" onclick="closePinModal()">✕</button>
-            </div>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 20px;">Ingresa tu PIN de 4 dígitos para acceder a Ajustes</p>
-            <div class="pin-input-group" id="pinInputGroup"></div>
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="btn-secondary" onclick="closePinModal()" style="width: auto; padding: 8px 16px;">Cancelar</button>
-            </div>
-            <p style="text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 16px;">PIN por defecto: 0000</p>
+            <img id="modalImage" src="">
         </div>
     </div>
 
-    <!-- PÁGINA 1: CAPTURA Y CÁLCULO -->
+    <!-- PÁGINA 1: CAPTURA Y CÁLCULO PORCENTUAL -->
     <div id="page-calc" class="page active">
         <header>
             <h1>Ventas Itzel Beltrán</h1>
-            <p>Calculadora Inteligente & Gestión de Entregas</p>
+            <p>Calculadora Prorrateada & Envíos Directos</p>
         </header>
 
         <div class="container">
-            <div class="card" style="background-color: #f1f5f9; border-color: #cbd5e1; padding: 10px 14px;">
+            <!-- Resumen de Configuración Activa -->
+            <div class="card" style="background-color: #f1f5f9; border-color: #cbd5e1; margin-bottom: 12px; padding: 10px 14px;">
                 <div class="card-title" style="margin-bottom: 4px; font-size: 0.85rem; color: var(--text-muted);">
                     ⚙️ Configuración Activa
                 </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; font-size: 0.8rem; color: #475569;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; font-size: 0.8rem; color: #475569; text-align: center;">
                     <div>💵 TC:<br><b id="lbl-tc">$18.50</b></div>
                     <div>📈 Tax:<br><b id="lbl-tax">9%</b></div>
                     <div>🧳 Maleta:<br><b id="lbl-maleta">$38</b></div>
+                    <div>💰 Margen:<br><b id="lbl-margen">40%</b></div>
                 </div>
             </div>
 
+            <!-- Formulario Principal -->
             <div class="card">
                 <div class="card-title">🛍️ Captura de Prenda</div>
                 
@@ -626,6 +501,7 @@
                     </div>
                 </div>
 
+                <!-- Inputs de Foto -->
                 <div class="row" style="margin-top: 4px; margin-bottom: 14px;">
                     <div class="col" style="width: 50%;">
                         <label>Foto Prenda</label>
@@ -645,31 +521,32 @@
                     </div>
                 </div>
 
+                <!-- Panel de Resultados de Costos -->
                 <div class="result-box">
                     <div class="result-row">
-                        <span>Costo Real Final:</span>
+                        <span>Costo Real Final (Pesos):</span>
                         <span id="calc-costo-real">$0.00 MXN</span>
                     </div>
                     <div class="result-row total">
-                        <span>Precio Sugerido:</span>
+                        <span>Precio de Venta Sugerido:</span>
                         <span id="calc-precio-sugerido">$0.00 MXN</span>
                     </div>
-                    <div class="result-row" style="margin-top: 4px; font-size: 0.75rem;">
-                        <span>Ganancia Neta:</span>
-                        <span style="color: #10b981; font-weight: 700;" id="calc-ganancia">$0.00 MXN</span>
+                    <div class="result-row" style="margin-top: 4px; font-size: 0.75rem; font-style: italic; display: flex; justify-content: flex-end;">
+                        <span style="color: #db2777;">Ganancia neta estimada: <b id="calc-ganancia">$0.00 MXN</b></span>
                     </div>
                 </div>
             </div>
 
+            <!-- Acciones -->
             <div class="card">
-                <div class="card-title">📣 Compartir en WhatsApp</div>
+                <div class="card-title">📣 Compartir e Iniciar Venta</div>
                 <button class="btn-primary" onclick="copyToClipboardAndShare()">
-                    📥 Guardar Foto y Abrir WhatsApp
+                    📥 Bajar Foto y Abrir WhatsApp
                 </button>
 
                 <div style="border-top: 1px solid var(--border-color); margin: 14px 0;"></div>
 
-                <div class="card-title" style="font-size: 0.95rem;">📌 ¿Ya la apartaron?</div>
+                <div class="card-title" style="font-size: 0.95rem;">📌 ¿Ya te la apartaron? Registrar Pedido</div>
                 <div class="form-group">
                     <label for="client-name">Nombre de la Clienta</label>
                     <input type="text" id="client-name" placeholder="Ej. María López">
@@ -681,11 +558,11 @@
         </div>
     </div>
 
-    <!-- PÁGINA 2: LISTA DE ENTREGAS CON INDEXEDDB -->
+    <!-- PÁGINA 2: LISTA DE ENTREGAS (INDEXEDDB RESPONSIVO) -->
     <div id="page-orders" class="page">
         <header>
             <h1>Checklist de Entregas</h1>
-            <p>Control Seguro con IndexedDB</p>
+            <p>Control Local Seguro e IndexedDB</p>
         </header>
 
         <div class="container">
@@ -700,84 +577,63 @@
                 </div>
             </div>
 
-            <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
-                <button class="btn-success btn-small" style="flex: 1; margin-top: 0;" onclick="exportToCSV()">📊 Exportar CSV</button>
-                <button class="btn-success btn-small" style="flex: 1; margin-top: 0;" onclick="exportToPDF()">📄 Exportar PDF</button>
-                <button class="btn-small btn-danger" style="margin-top: 0;" onclick="clearAllOrders()">🚨 Limpiar</button>
-            </div>
-
-            <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterOrders('all')">📋 Todos</button>
-                <button class="filter-btn" onclick="filterOrders('pendiente')">⏳ Pendientes</button>
-                <button class="filter-btn" onclick="filterOrders('entregado')">✓ Entregados</button>
+            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                <button class="btn-success btn-small" style="flex: 1; margin-top:0;" onclick="exportToCSV()">📊 Exportar a Excel (CSV)</button>
+                <button class="btn-small btn-danger" style="margin-top:0;" onclick="clearAllOrders()">🚨 Limpiar Todo</button>
             </div>
 
             <div id="orders-list-container"></div>
         </div>
     </div>
 
-    <!-- PÁGINA 3: CONFIGURACIÓN AVANZADA -->
+    <!-- PÁGINA 3: PANEL DE AJUSTES DINÁMICOS -->
     <div id="page-settings" class="page">
         <header>
-            <h1>⚙️ Configuración</h1>
-            <p>Variables de Negocio</p>
+            <h1>Configuración Base</h1>
+            <p>Control de Variables del Margen</p>
         </header>
-
         <div class="container">
             <div class="card">
-                <div class="card-title">💰 Ajustes de Costos</div>
+                <div class="card-title">⚙️ Ajustes de Costos y Margen</div>
                 
                 <div class="config-section">
-                    <div class="config-title">Tipo de Cambio (MXN → USD)</div>
-                    <div class="config-desc">Define cuántos pesos mexicanos equivalen a 1 dólar estadounidense</div>
+                    <div class="config-title">Tipo de Cambio (MXN por USD)</div>
+                    <div class="config-desc">Define la conversión de dólares a pesos</div>
                 </div>
-
                 <div class="form-group">
-                    <label for="cfg-tc">Tipo de Cambio</label>
-                    <input type="number" id="cfg-tc" step="0.01" placeholder="18.50">
+                    <input type="number" id="cfg-tc" step="0.01">
                 </div>
 
                 <div class="config-section">
-                    <div class="config-title">Sales Tax (USA)</div>
-                    <div class="config-desc">Impuesto de venta que se añade en la tienda estadounidense</div>
+                    <div class="config-title">Sales Tax Tienda EE. UU. (%)</div>
+                    <div class="config-desc">Impuesto aplicado en la caja de la tienda</div>
                 </div>
-
                 <div class="form-group">
-                    <label for="cfg-tax">Sales Tax (%)</label>
-                    <input type="number" id="cfg-tax" step="0.1" placeholder="9">
+                    <input type="number" id="cfg-tax" step="0.1">
                 </div>
 
                 <div class="config-section">
-                    <div class="config-title">Costo de Maleta</div>
-                    <div class="config-desc">Gasto prorrateado por prenda para traerlas en maleta</div>
+                    <div class="config-title">Costo de Maleta prorrateado ($ MXN)</div>
+                    <div class="config-desc">Gasto logístico fijo por prenda</div>
                 </div>
-
                 <div class="form-group">
-                    <label for="cfg-maleta">Costo por Prenda ($MXN)</label>
-                    <input type="number" id="cfg-maleta" step="1" placeholder="38">
+                    <input type="number" id="cfg-maleta" step="1">
                 </div>
 
-                <button class="btn-primary" onclick="saveSettings()">💾 Guardar Cambios</button>
-            </div>
-
-            <div class="card">
-                <div class="card-title">🔐 Seguridad</div>
                 <div class="config-section">
-                    <div class="config-title">PIN de Protección</div>
-                    <div class="config-desc">Protege los ajustes contra cambios accidentales</div>
+                    <div class="config-title">Margen de Ganancia Deseado (%)</div>
+                    <div class="config-desc">Porcentaje neto de ganancia sobre el costo real</div>
                 </div>
-                <button class="btn-secondary" onclick="openPinSettings()">🔑 Cambiar PIN</button>
-            </div>
+                <div class="form-group">
+                    <input type="number" id="cfg-margen" step="1">
+                </div>
 
-            <div class="card">
-                <div class="card-title">📊 Datos & Privacidad</div>
-                <button class="btn-secondary" onclick="backupData()">☁️ Crear Respaldo</button>
-                <button class="btn-secondary" onclick="downloadDiagnostics()">📋 Descargar Diagnóstico</button>
+                <button class="btn-primary" onclick="saveSettings()">💾 Guardar Configuración</button>
             </div>
         </div>
     </div>
 
-    <!-- TABS DE NAVEGACIÓN -->
+    <!-- TABS DE NAVEGACIÓN INFERIOR -->
     <nav class="nav-tabs">
         <button id="tab-calc" class="tab-item active" onclick="switchTab('calc')">
             <span class="tab-icon">🛍️</span>
@@ -795,226 +651,89 @@
     </nav>
 
     <script>
-        // ============================================
-        // SISTEMA DE ALMACENAMIENTO INDEXEDDB
-        // ============================================
-        let db;
-        let currentFilter = 'all';
-        let currentItemPhotos = { prenda: null, etiqueta: null };
-
-        // Inicializar IndexedDB
-        const dbRequest = indexedDB.open("VentasItzelDB", 2);
-        
-        dbRequest.onupgradeneeded = function(e) {
-            db = e.target.result;
-            if (!db.objectStoreNames.contains("orders")) {
-                db.createObjectStore("orders", { keyPath: "id" });
-            }
-            if (!db.objectStoreNames.contains("settings")) {
-                db.createObjectStore("settings", { keyPath: "key" });
-            }
-        };
-
-        dbRequest.onsuccess = function(e) {
-            db = e.target.result;
-            loadSettings();
-            updateOrderBadges();
-        };
-
-        dbRequest.onerror = function() {
-            showToast("❌ Error al inicializar la base de datos", "error");
-        };
-
-        // ============================================
-        // GESTIÓN DE CONFIGURACIÓN
-        // ============================================
-        let appSettings = {
+        // --- MOTOR LOGICIAL DE CONFIGURACIONES ---
+        let appSettings = JSON.parse(localStorage.getItem('itb_settings')) || {
             tc: 18.50,
             tax: 9.0,
             maleta: 38.0,
-            pin: "0000"
+            margen: 40.0
         };
-
-        function loadSettings() {
-            if (!db) return;
-            const tx = db.transaction(["settings"], "readonly");
-            const store = tx.objectStore("settings");
-            
-            ['tc', 'tax', 'maleta', 'pin'].forEach(key => {
-                store.get(key).onsuccess = function(e) {
-                    const data = e.target.result;
-                    if (data) appSettings[key] = data.value;
-                };
-            });
-
-            tx.oncomplete = function() {
-                initSettingsFields();
-            };
-        }
 
         function initSettingsFields() {
             document.getElementById('cfg-tc').value = appSettings.tc;
             document.getElementById('cfg-tax').value = appSettings.tax;
             document.getElementById('cfg-maleta').value = appSettings.maleta;
+            document.getElementById('cfg-margen').value = appSettings.margen;
             
             document.getElementById('lbl-tc').innerText = `$${appSettings.tc.toFixed(2)}`;
             document.getElementById('lbl-tax').innerText = `${appSettings.tax}%`;
-            document.getElementById('lbl-maleta').innerText = `$${appSettings.maleta}`;
+            document.getElementById('lbl-maleta').innerText = `$${appSettings.maleta} MXN`;
+            document.getElementById('lbl-margen').innerText = `${appSettings.margen}%`;
         }
 
         function saveSettings() {
-            const tc = parseFloat(document.getElementById('cfg-tc').value) || 18.50;
-            const tax = parseFloat(document.getElementById('cfg-tax').value) || 9.0;
-            const maleta = parseFloat(document.getElementById('cfg-maleta').value) || 38.0;
-
-            if (tc <= 0 || tax < 0 || maleta < 0) {
-                showToast("❌ Los valores no pueden ser negativos o cero", "error");
-                return;
-            }
-
-            const settings = [
-                { key: 'tc', value: tc },
-                { key: 'tax', value: tax },
-                { key: 'maleta', value: maleta }
-            ];
-
-            const tx = db.transaction(["settings"], "readwrite");
-            const store = tx.objectStore("settings");
+            appSettings.tc = parseFloat(document.getElementById('cfg-tc').value) || 18.50;
+            appSettings.tax = parseFloat(document.getElementById('cfg-tax').value) || 9.0;
+            appSettings.maleta = parseFloat(document.getElementById('cfg-maleta').value) || 38.0;
+            appSettings.margen = parseFloat(document.getElementById('cfg-margen').value) || 40.0;
             
-            settings.forEach(s => {
-                store.put(s);
-            });
-
-            tx.oncomplete = function() {
-                appSettings.tc = tc;
-                appSettings.tax = tax;
-                appSettings.maleta = maleta;
-                initSettingsFields();
-                calculatePrice();
-                showToast("✅ Configuración guardada", "success");
-                switchTab('calc');
-            };
+            localStorage.setItem('itb_settings', JSON.stringify(appSettings));
+            initSettingsFields();
+            calculatePrice();
+            alert("¡Variables de negocio guardadas!");
+            switchTab('calc');
         }
 
-        // ============================================
-        // PIN DE SEGURIDAD
-        // ============================================
-        let pinAttempt = "";
-
-        function openPinSettings() {
-            document.getElementById('pinModal').classList.add('active');
-            renderPinInputs();
-        }
-
-        function closePinModal() {
-            document.getElementById('pinModal').classList.remove('active');
-            pinAttempt = "";
-        }
-
-        function renderPinInputs() {
-            const group = document.getElementById('pinInputGroup');
-            group.innerHTML = "";
-            for (let i = 0; i < 4; i++) {
-                const input = document.createElement('input');
-                input.type = 'number';
-                input.min = '0';
-                input.max = '9';
-                input.className = 'pin-input';
-                input.maxLength = '1';
-                input.dataset.index = i;
-                
-                input.addEventListener('input', (e) => {
-                    if (e.target.value.length === 1 && i < 3) {
-                        group.children[i + 1].focus();
-                    }
-                    updatePinAttempt();
-                });
-
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Backspace' && !e.target.value && i > 0) {
-                        group.children[i - 1].focus();
-                    }
-                });
-
-                group.appendChild(input);
+        // --- INICIALIZADOR INDEXEDDB (ESPACIO FOTOS ILIMITADO) ---
+        let db;
+        const dbReq = indexedDB.open("VentasItzelDB", 3);
+        
+        dbReq.onupgradeneeded = function(e) {
+            db = e.target.result;
+            if (!db.objectStoreNames.contains("orders")) {
+                db.createObjectStore("orders", { keyPath: "id" });
             }
-        }
+        };
 
-        function updatePinAttempt() {
-            const inputs = Array.from(document.querySelectorAll('.pin-input'));
-            pinAttempt = inputs.map(i => i.value).join('');
+        dbReq.onsuccess = function(e) {
+            db = e.target.result;
+            updateOrderBadges();
+        };
+
+        let currentItemPhotos = { prenda: null, etiqueta: null };
+
+        function switchTab(tab) {
+            document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
             
-            if (pinAttempt.length === 4) {
-                if (pinAttempt === appSettings.pin) {
-                    showToast("✅ PIN correcto", "success");
-                    setTimeout(() => {
-                        closePinModal();
-                        promptNewPin();
-                    }, 500);
-                } else {
-                    showToast("❌ PIN incorrecto", "error");
-                    pinAttempt = "";
-                    renderPinInputs();
-                }
+            if (tab === 'calc') {
+                document.getElementById('page-calc').classList.add('active');
+                document.getElementById('tab-calc').classList.add('active');
+            } else if (tab === 'orders') {
+                document.getElementById('page-orders').classList.add('active');
+                document.getElementById('tab-orders').classList.add('active');
+                renderOrders();
+            } else {
+                document.getElementById('page-settings').classList.add('active');
+                document.getElementById('tab-settings').classList.add('active');
             }
         }
 
-        function promptNewPin() {
-            const newPin = prompt("Ingresa tu nuevo PIN (4 dígitos):");
-            if (newPin && /^\d{4}$/.test(newPin)) {
-                const tx = db.transaction(["settings"], "readwrite");
-                tx.objectStore("settings").put({ key: 'pin', value: newPin });
-                tx.oncomplete = function() {
-                    appSettings.pin = newPin;
-                    showToast("✅ PIN actualizado", "success");
-                };
-            } else if (newPin) {
-                showToast("❌ El PIN debe ser exactamente 4 dígitos", "error");
-            }
-        }
-
-        // ============================================
-        // CÁLCULO DE PRECIOS
-        // ============================================
+        // --- MOTOR DE PRECIOS POR MARGEN PORCENTUAL EDITABLE ---
         function getPrices(usdPrice) {
             if (!usdPrice || usdPrice <= 0) return { costoReal: 0, sugerido: 0, ganancia: 0 };
             
+            // 1. Desglose exacto del costo en pesos
             const taxValue = usdPrice * (appSettings.tax / 100);
             const totalUSD = usdPrice + taxValue;
             const totalMXN = totalUSD * appSettings.tc;
             const costoReal = totalMXN + appSettings.maleta;
 
-            let sugerido = 0;
-            const p = parseFloat(usdPrice);
-
-            const priceTable = [
-                { max: 1.00, price: 150 },
-                { max: 2.00, price: 180 },
-                { max: 3.00, price: 220 },
-                { max: 4.00, price: 250 },
-                { max: 5.00, price: 280 },
-                { max: 6.00, price: 320 },
-                { max: 7.00, price: 350 },
-                { max: 8.00, price: 380 },
-                { max: 9.00, price: 400 },
-                { max: 10.00, price: 450 },
-                { max: 12.00, price: 500 },
-                { max: 15.00, price: 600 },
-                { max: 20.00, price: 750 },
-                { max: 25.00, price: 900 },
-                { max: 30.00, price: 1100 }
-            ];
-
-            for (let tier of priceTable) {
-                if (p <= tier.max) {
-                    sugerido = tier.price;
-                    break;
-                }
-            }
-
-            if (p > 30) {
-                sugerido = Math.ceil((costoReal * 1.45) / 10) * 10;
-            }
+            // 2. Aplicar el margen configurado dinámicamente
+            let sugeridoRaw = costoReal * (1 + (appSettings.margen / 100));
+            
+            // Redondear a la decena superior estética (ej: 432 -> 440)
+            let sugerido = Math.ceil(sugeridoRaw / 10) * 10;
 
             return {
                 costoReal: Math.round(costoReal),
@@ -1024,23 +743,19 @@
         }
 
         function calculatePrice() {
-            const usdPrice = parseFloat(document.getElementById('usd-price').value);
-            const results = getPrices(usdPrice);
+            let usdPrice = parseFloat(document.getElementById('usd-price').value);
+            let results = getPrices(usdPrice);
 
             document.getElementById('calc-costo-real').innerText = `$${results.costoReal.toLocaleString('es-MX')} MXN`;
             document.getElementById('calc-precio-sugerido').innerText = `$${results.sugerido.toLocaleString('es-MX')} MXN`;
             document.getElementById('calc-ganancia').innerText = `$${results.ganancia.toLocaleString('es-MX')} MXN`;
         }
 
-        // ============================================
-        // MANEJO DE FOTOS CON COMPRESIÓN
-        // ============================================
         function handlePhoto(input, imgId, labelId) {
             const file = input.files[0];
             if (!file) return;
 
-            const labelEl = document.getElementById(labelId);
-            labelEl.innerText = "⏳ Procesando...";
+            document.getElementById(labelId).innerText = "⏳ Cargando...";
 
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -1066,85 +781,77 @@
                     const targetImg = document.getElementById(imgId);
                     targetImg.src = compressedBase64;
                     targetImg.style.display = 'block';
-                    labelEl.style.display = 'none';
+                    document.getElementById(labelId).style.display = 'none';
 
-                    if (imgId === 'img-prenda') currentItemPhotos.prenda = compressedBase64;
-                    if (imgId === 'img-etiqueta') currentItemPhotos.etiqueta = compressedBase64;
+                    if(imgId === 'img-prenda') currentItemPhotos.prenda = compressedBase64;
+                    if(imgId === 'img-etiqueta') currentItemPhotos.etiqueta = compressedBase64;
                 };
                 img.src = e.target.result;
             };
             reader.readAsDataURL(file);
         }
 
-        // ============================================
-        // COMPARTIR EN WHATSAPP
-        // ============================================
         function copyToClipboardAndShare() {
-            const usdPrice = document.getElementById('usd-price').value;
-            const size = document.getElementById('item-size').value;
-            const desc = document.getElementById('item-desc').value;
-            const prices = getPrices(parseFloat(usdPrice));
+            let usdPrice = document.getElementById('usd-price').value;
+            let size = document.getElementById('item-size').value;
+            let desc = document.getElementById('item-desc').value;
+            let prices = getPrices(parseFloat(usdPrice));
 
-            if (!usdPrice) {
-                showToast("❌ Introduce el precio en dólares", "error");
+            if(!usdPrice) {
+                alert("Introduce al menos el precio en dólares.");
                 return;
             }
 
-            if (currentItemPhotos.prenda) {
+            if(currentItemPhotos.prenda) {
                 const downloadLink = document.createElement("a");
                 downloadLink.href = currentItemPhotos.prenda;
-                downloadLink.download = `Venta_${size}_$${prices.sugerido}MXN.jpg`;
+                downloadLink.download = `Prenda_${size}_$${prices.sugerido}MXN.jpg`;
                 document.body.appendChild(downloadLink);
                 downloadLink.click();
                 document.body.removeChild(downloadLink);
             }
 
             let textToCopy = `✨ ¡DISPONIBLE EN TIENDA! ✨\n`;
-            if (desc && desc.trim() !== "") textToCopy += `👗 Prenda: ${desc}\n`;
-            if (size !== "N/A") textToCopy += `📏 Talla: ${size}\n`;
-            textToCopy += `💵 Precio: $${prices.sugerido} MXN\n\n¡Pídela ya por mensaje! 🛍️✨`;
+            if(desc && desc.trim() !== "") textToCopy += ` 👗 Prenda: ${desc}\n`;
+            if(size !== "N/A") textToCopy += `📏 Talla: ${size}\n`;
+            textToCopy += `💵 Precio Especial: $${prices.sugerido} MXN\n`;
+            textToCopy += `\n¡Pídela ya antes de que me vaya! 🛍️✨`;
 
             navigator.clipboard.writeText(textToCopy).then(() => {
-                showToast("✅ Foto descargada y texto copiado", "success");
-                setTimeout(() => {
-                    window.location.href = "whatsapp://send";
-                }, 600);
-            }).catch(() => {
-                showToast("❌ Error al copiar", "error");
+                let toast = document.getElementById('toast');
+                toast.style.display = 'block';
+                setTimeout(() => { toast.style.display = 'none'; }, 2500);
+
+                setTimeout(() => { window.location.href = "whatsapp://send"; }, 600);
             });
         }
 
-        // ============================================
-        // GUARDADO DE PEDIDOS
-        // ============================================
         function saveOrder() {
-            const usdPrice = parseFloat(document.getElementById('usd-price').value);
-            const client = document.getElementById('client-name').value;
-            const size = document.getElementById('item-size').value;
-            const desc = document.getElementById('item-desc').value;
+            let usdPrice = parseFloat(document.getElementById('usd-price').value);
+            let client = document.getElementById('client-name').value;
+            let size = document.getElementById('item-size').value;
+            let desc = document.getElementById('item-desc').value;
 
-            if (!usdPrice || !client) {
-                showToast("❌ Completa precio y nombre", "error");
+            if(!usdPrice || !client) {
+                alert("Ingresa precio y nombre del cliente para guardar.");
                 return;
             }
 
-            const prices = getPrices(usdPrice);
-            const newOrder = {
+            let prices = getPrices(usdPrice);
+            let newOrder = {
                 id: Date.now(),
                 client: client,
-                desc: desc || "Ropa de Niños",
+                desc: desc || "Ropa Importada",
                 size: size,
                 usdPrice: usdPrice,
                 finalPrice: prices.sugerido,
                 photoPrenda: currentItemPhotos.prenda,
                 photoEtiqueta: currentItemPhotos.etiqueta,
-                status: 'pendiente',
-                createdAt: new Date().toISOString()
+                status: 'pendiente'
             };
 
             const tx = db.transaction(["orders"], "readwrite");
-            const store = tx.objectStore("orders");
-            store.add(newOrder);
+            tx.objectStore("orders").add(newOrder);
 
             tx.oncomplete = function() {
                 document.getElementById('client-name').value = "";
@@ -1161,80 +868,63 @@
                 currentItemPhotos = { prenda: null, etiqueta: null };
                 calculatePrice();
                 updateOrderBadges();
-                showToast("✅ Pedido guardado en IndexedDB", "success");
+                alert("¡Pedido registrado!");
             };
         }
 
-        // ============================================
-        // GESTIÓN DE PEDIDOS
-        // ============================================
         function updateOrderBadges() {
             if (!db) return;
-            const tx = db.transaction(["orders"], "readonly");
-            const store = tx.objectStore("orders");
-            store.getAll().onsuccess = function(e) {
-                const orders = e.target.result;
-                const pending = orders.filter(o => o.status === 'pendiente').length;
-                const total = orders.length;
+            const store = db.transaction(["orders"], "readonly").objectStore("orders");
+            const req = store.getAll();
+            req.onsuccess = function() {
+                let pending = req.result.filter(o => o.status === 'pendiente').length;
+                let badge = document.getElementById('badge-orders-count');
+                
+                badge.innerText = pending;
+                badge.style.display = pending > 0 ? 'block' : 'none';
 
-                document.getElementById('badge-orders-count').innerText = pending;
-                if (pending > 0) {
-                    document.getElementById('badge-orders-count').style.display = 'block';
-                } else {
-                    document.getElementById('badge-orders-count').style.display = 'none';
-                }
-
-                document.getElementById('stat-total').innerText = total;
+                document.getElementById('stat-total').innerText = req.result.length;
                 document.getElementById('stat-pending').innerText = pending;
             };
         }
 
         function renderOrders() {
             const container = document.getElementById('orders-list-container');
-            container.innerHTML = "<div style='text-align:center; padding:20px;'>⏳ Cargando...</div>";
+            container.innerHTML = "";
 
-            const tx = db.transaction(["orders"], "readonly");
-            const store = tx.objectStore("orders");
-            store.getAll().onsuccess = function(e) {
-                const orders = e.target.result;
-                let filtered = orders;
+            const store = db.transaction(["orders"], "readonly").objectStore("orders");
+            const req = store.getAll();
 
-                if (currentFilter !== 'all') {
-                    filtered = orders.filter(o => o.status === currentFilter);
-                }
-
-                container.innerHTML = "";
-
-                if (filtered.length === 0) {
-                    container.innerHTML = `<div style="text-align:center; padding:40px 20px; color:var(--text-muted);">
-                        📭 No hay pedidos en esta categoría
-                    </div>`;
+            req.onsuccess = function() {
+                const list = req.result;
+                if(list.length === 0) {
+                    container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted);">No hay registros aún.</div>`;
                     return;
                 }
 
-                filtered.reverse().forEach(order => {
-                    const card = document.createElement('div');
+                list.reverse().forEach(order => {
+                    let card = document.createElement('div');
                     card.className = 'order-card';
-                    
-                    const thumbSrc = order.photoPrenda || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="%23cbd5e1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+                    let thumbSrc = order.photoPrenda || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="%23cbd5e1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+                    let ticketText = order.photoEtiqueta ? `🏷️ Ver Etiqueta` : `Sin ticket`;
 
                     card.innerHTML = `
                         <div class="order-header">
                             <span class="order-client">👤 ${order.client}</span>
-                            <span class="order-status status-${order.status}">${order.status === 'pendiente' ? '⏳ PENDIENTE' : '✓ ENTREGADO'}</span>
+                            <span class="order-status status-${order.status}">${order.status.toUpperCase()}</span>
                         </div>
                         <div class="order-body">
-                            <img class="order-thumb" src="${thumbSrc}" onclick="viewImage('${thumbSrc}')">
+                            <img class="order-thumb" src="${thumbSrc}" onclick="openImageModal('${thumbSrc}')">
                             <div class="order-info">
                                 <div style="color:var(--text-main); font-weight:500;">${order.desc}</div>
-                                <div>Talla: <b>${order.size}</b> | USD: $${order.usdPrice}</div>
-                                ${order.photoEtiqueta ? `<div style="font-size:0.75rem; color:#6366f1; cursor:pointer;" onclick="viewImage('${order.photoEtiqueta}')">🏷️ Ver Ticket</div>` : ''}
+                                <div>Talla: <b>${order.size}</b> | USD original: $${order.usdPrice}</div>
+                                <div style="font-size:0.75rem; color:#6366f1; cursor:pointer;" onclick="if('${order.photoEtiqueta}') openImageModal('${order.photoEtiqueta}')">${ticketText}</div>
                                 <div class="order-price">$${order.finalPrice} MXN</div>
                             </div>
                         </div>
                         <div class="order-actions">
-                            <button class="btn-small btn-primary" style="background-color:var(--success);" onclick="toggleStatus(${order.id})">✓ Cambiar</button>
-                            <button class="btn-small btn-danger" onclick="deleteOrder(${order.id})">🗑️ Borrar</button>
+                            <button class="btn-small btn-primary" style="background-color:var(--success);" onclick="toggleStatus(${order.id}, '${order.status}')">✓ Cambiar</button>
+                            <button class="btn-small btn-secondary" style="color:var(--danger);" onclick="deleteOrder(${order.id})">Borrar</button>
                         </div>
                     `;
                     container.appendChild(card);
@@ -1242,12 +932,12 @@
             };
         }
 
-        function toggleStatus(id) {
+        function toggleStatus(id, current) {
             const tx = db.transaction(["orders"], "readwrite");
             const store = tx.objectStore("orders");
             store.get(id).onsuccess = function(e) {
-                const data = e.target.result;
-                data.status = data.status === 'pendiente' ? 'entregado' : 'pendiente';
+                let data = e.target.result;
+                data.status = current === 'pendiente' ? 'entregado' : 'pendiente';
                 store.put(data);
                 tx.oncomplete = function() {
                     renderOrders();
@@ -1257,167 +947,47 @@
         }
 
         function deleteOrder(id) {
-            if (confirm("¿Eliminar este registro?")) {
+            if(confirm("¿Eliminar este registro permanentemente?")) {
                 const tx = db.transaction(["orders"], "readwrite");
                 tx.objectStore("orders").delete(id);
                 tx.oncomplete = function() {
                     renderOrders();
                     updateOrderBadges();
-                    showToast("✅ Pedido eliminado", "success");
                 };
             }
         }
 
         function clearAllOrders() {
-            if (confirm("🚨 ¿Borrar TODOS los pedidos? Esta acción no se puede deshacer.")) {
+            if(confirm("⚠ ¿Limpiar TODOS los pedidos de la base de datos?")) {
                 const tx = db.transaction(["orders"], "readwrite");
                 tx.objectStore("orders").clear();
                 tx.oncomplete = function() {
                     renderOrders();
                     updateOrderBadges();
-                    showToast("✅ Base de datos limpiada", "success");
                 };
             }
         }
 
-        function filterOrders(filter) {
-            currentFilter = filter;
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            renderOrders();
-        }
-
-        // ============================================
-        // EXPORTACIÓN DE DATOS
-        // ============================================
         function exportToCSV() {
-            const tx = db.transaction(["orders"], "readonly");
-            tx.objectStore("orders").getAll().onsuccess = function(e) {
+            const store = db.transaction(["orders"], "readonly").objectStore("orders");
+            store.getAll().onsuccess = function(e) {
                 const data = e.target.result;
-                if (data.length === 0) {
-                    showToast("❌ No hay datos para exportar", "error");
-                    return;
-                }
+                if(data.length === 0) return alert("No hay pedidos para exportar.");
 
-                let csvContent = "\uFEFF";
-                csvContent += "Fecha,Cliente,Descripción,Talla,Precio USD,Precio MXN,Estado,Ganancia\n";
-
+                let csv = "\uFEFFID,Cliente,Prenda,Talla,Precio USD,Precio MXN Final,Estado\n";
                 data.forEach(o => {
-                    const date = new Date(o.createdAt).toLocaleDateString('es-MX');
-                    const ganancia = o.finalPrice - Math.round((o.usdPrice * (1 + appSettings.tax/100) * appSettings.tc) + appSettings.maleta);
-                    csvContent += `${date},"${o.client}","${o.desc}",${o.size},${o.usdPrice},${o.finalPrice},${o.status},${ganancia}\n`;
+                    csv += `${o.id},"${o.client}","${o.desc}",${o.size},${o.usdPrice},${o.finalPrice},${o.status}\n`;
                 });
 
-                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
                 const link = document.createElement("a");
                 link.href = URL.createObjectURL(blob);
-                link.download = `Ventas_Itzel_${new Date().toISOString().split('T')[0]}.csv`;
+                link.download = `Ventas_Itzel_Beltran_Reporte.csv`;
                 link.click();
-                showToast("✅ CSV exportado", "success");
             };
         }
 
-        function exportToPDF() {
-            showToast("📄 Generando PDF...", "info");
-            const tx = db.transaction(["orders"], "readonly");
-            tx.objectStore("orders").getAll().onsuccess = function(e) {
-                const data = e.target.result;
-                if (data.length === 0) {
-                    showToast("❌ No hay datos para exportar", "error");
-                    return;
-                }
-
-                let pdfContent = "%PDF-1.4\n";
-                pdfContent += "1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj\n";
-                pdfContent += "2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj\n";
-                pdfContent += "3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 612 792]/Contents 4 0 R/Resources<</Font<</F1 5 0 R>>>>>>endobj\n";
-                pdfContent += "4 0 obj<</Length 1000>>stream\nBT /F1 10 Tf 50 750 Td (Reporte Ventas Itzel Beltrán) Tj 0 -20 Td\n";
-                
-                data.forEach((o, idx) => {
-                    pdfContent += `(${o.client} - ${o.desc} - $${o.finalPrice}) Tj 0 -15 Td\n`;
-                });
-
-                pdfContent += "ET\nendstream\nendobj\n";
-                pdfContent += "5 0 obj<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>endobj\n";
-                pdfContent += "xref\n0 6\n";
-
-                const blob = new Blob([pdfContent], { type: 'application/pdf' });
-                const link = document.createElement("a");
-                link.href = URL.createObjectURL(blob);
-                link.download = `Ventas_Itzel_${new Date().toISOString().split('T')[0]}.pdf`;
-                link.click();
-                showToast("✅ PDF exportado", "success");
-            };
-        }
-
-        function backupData() {
-            const tx = db.transaction(["orders", "settings"], "readonly");
-            const backup = {
-                orders: [],
-                settings: appSettings,
-                timestamp: new Date().toISOString()
-            };
-
-            tx.objectStore("orders").getAll().onsuccess = function(e) {
-                backup.orders = e.target.result;
-                
-                const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
-                const link = document.createElement("a");
-                link.href = URL.createObjectURL(blob);
-                link.download = `Backup_Ventas_Itzel_${new Date().toISOString().split('T')[0]}.json`;
-                link.click();
-                showToast("✅ Respaldo creado", "success");
-            };
-        }
-
-        function downloadDiagnostics() {
-            const diag = {
-                timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent,
-                storage: {
-                    indexedDB: !!window.indexedDB,
-                    localStorage: !!window.localStorage
-                },
-                settings: appSettings
-            };
-
-            const blob = new Blob([JSON.stringify(diag, null, 2)], { type: 'application/json' });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = `Diagnostico_${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
-        }
-
-        // ============================================
-        // UI UTILITIES
-        // ============================================
-        function switchTab(tab) {
-            document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
-            
-            const pageMap = {
-                'calc': { page: 'page-calc', tab: 'tab-calc' },
-                'orders': { page: 'page-orders', tab: 'tab-orders' },
-                'settings': { page: 'page-settings', tab: 'tab-settings' }
-            };
-
-            if (pageMap[tab]) {
-                document.getElementById(pageMap[tab].page).classList.add('active');
-                document.getElementById(pageMap[tab].tab).classList.add('active');
-                if (tab === 'orders') renderOrders();
-                if (tab === 'settings') initSettingsFields();
-            }
-        }
-
-        function showToast(message, type = 'info') {
-            const toast = document.getElementById('toast');
-            toast.innerText = message;
-            toast.className = `alert-toast toast-${type}`;
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 3000);
-        }
-
-        function viewImage(src) {
+        function openImageModal(src) {
             document.getElementById('modalImage').src = src;
             document.getElementById('imageModal').classList.add('active');
         }
@@ -1426,23 +996,8 @@
             document.getElementById('imageModal').classList.remove('active');
         }
 
-        // Cerrar modales con ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeImageModal();
-                closePinModal();
-            }
-        });
-
-        // Inicialización
-        window.addEventListener('load', function() {
-            if (!db) {
-                setTimeout(() => {
-                    loadSettings();
-                    updateOrderBadges();
-                }, 500);
-            }
-        });
+        // Inicialización base
+        initSettingsFields();
     </script>
 </body>
 </html>
